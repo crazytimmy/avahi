@@ -1,0 +1,30 @@
+name: Rebuild Image on Alpine Update
+
+on:
+  schedule:
+    # Run every Monday at 00:00
+    - cron: '0 0 * * 1' 
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update_image:
+    name: Update image if alpine updated
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: auto-update-alpine
+
+      - name: Get Latest Alpine Version
+        id: version
+        uses: joepitt91/action-version-from-dockerhub@v1
+        with:
+          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: alpine
+
+      - name: Print Alpine image version
+        run: |
+          echo "The latest tag is ${{ steps.get-version.outputs.tag }}"
+          echo "The latest version is ${{ steps.get-version.outputs.version }}"
