@@ -20,7 +20,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: name/app
+          images: alpine:latest
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
