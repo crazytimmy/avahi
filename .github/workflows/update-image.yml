@@ -26,5 +26,5 @@ jobs:
 
       - name: Print Alpine image version
         run: |
-          echo "The latest tag is ${{ steps.get-version.outputs.tag }}"
-          echo "The latest version is ${{ steps.get-version.outputs.version }}"
+          echo "The latest tag is ${{ steps.version.outputs.tag }}"
+          echo "The latest version is ${{ steps.version.outputs.version }}"
